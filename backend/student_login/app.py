@@ -7,7 +7,6 @@ app.secret_key = "supersecretkey"
 
 DB_PATH = os.path.join("database", "users.db")
 
-# Ensure DB exists
 if not os.path.exists(DB_PATH):
     from database import init_db
     init_db(DB_PATH)
