@@ -30,7 +30,7 @@ body {
 .btn {
   width: 100%;
   padding: 10px;
-  background-color: #0275d8; /* Blue for login */
+  background-color: #0275d8; 
   color: white;
   border: none;
   border-radius: 5px;
@@ -43,7 +43,7 @@ body {
 }
 
 .btn.signup {
-  background-color: #5cb85c; /* Green for sign up */
+  background-color: #5cb85c; 
 }
 
 .btn.signup:hover {
@@ -51,7 +51,7 @@ body {
 }
 
 .btn.home {
-  background-color: #f0ad4e; /* Orange for home */
+  background-color: #f0ad4e; 
 }
 
 .btn.home:hover {
