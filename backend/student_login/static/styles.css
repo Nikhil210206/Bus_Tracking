@@ -30,11 +30,32 @@ body {
 .btn {
   width: 100%;
   padding: 10px;
-  background-color: #0275d8;
+  background-color: #0275d8; 
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.btn.signup {
+  background-color: #5cb85c; 
+}
+
+.btn.signup:hover {
+  background-color: #4cae4c;
+}
+
+.btn.home {
+  background-color: #f0ad4e; 
+}
+
+.btn.home:hover {
+  background-color: #ec971f;
 }
 
 .flash {
