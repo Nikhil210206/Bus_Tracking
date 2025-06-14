@@ -37,6 +37,15 @@ body {
   cursor: pointer;
 }
 
+.btn.signup {
+  background-color: #5cb85c;
+}
+.btn:hover {
+  background-color: #0056b3;
+}
+.btn.signup:hover {
+  background-color: #4cae4c;
+}
 .flash {
   color: red;
   text-align: center;
