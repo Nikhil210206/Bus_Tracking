@@ -2,37 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Student Login - Bus Tracker</title>
+  <title>Driver Login - Bus Tracker</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
   <div class="login-box">
-    <h2>Student Login</h2>
+    <h2>Driver Login</h2>
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <div class="flash">{{ messages[0] }}</div>
       {% endif %}
     {% endwith %}
-    <form action="{{ url_for('student_bp.login') }}" method="POST">
+    <form action="{{ url_for('driver.driver_login') }}" method="POST">
       <div class="textbox">
-        <input type="text" name="student_id" placeholder="Student ID" required>
+        <input type="text" name="driver_id" placeholder="Driver ID" required>
       </div>
       <div class="textbox">
         <input type="password" name="password" placeholder="Password" required>
       </div>
       <input type="submit" class="btn" value="Login">
     </form>
-
     <div style="text-align:center; margin-top: 10px;">
-      <p>New Student?</p>
-      <a href="{{ url_for('student_bp.register') }}"><button class="btn signup">Register</button></a>
+      <p>New Driver?</p>
+      <a href="{{ url_for('driver.driver_register') }}"><button class="btn signup">Register</button></a>
     </div>
-
     <div style="text-align:center; margin-top: 10px;">
-      <p>Are you a driver?</p>
-      <a href="{{ url_for('driver.driver_login') }}">
-        <button class="btn" style="background-color: #6c757d;">Driver Login</button>
-      </a>
+      <a href="{{ url_for('student_bp.home') }}"><button class="btn" style="background-color: #f0ad4e;">Back to Student Login</button></a>
     </div>
   </div>
 </body>
