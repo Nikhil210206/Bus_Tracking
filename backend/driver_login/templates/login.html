@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Driver Login - Bus Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="login-box">
+    <h2>Driver Login</h2>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+    <form action="/driver/login" method="POST">
+      <div class="textbox">
+        <input type="text" name="driver_id" placeholder="Driver ID" required>
+      </div>
+      <div class="textbox">
+        <input type="password" name="password" placeholder="Password" required>
+      </div>
+      <input type="submit" class="btn" value="Login">
+    </form>
+
+    <div style="text-align:center; margin-top: 10px;">
+      <p>New driver?</p>
+      <a href="/driver/register"><button class="btn signup">Register</button></a>
+    </div>
+
+    <div style="text-align:center; margin-top: 10px;">
+      <p>Back to home?</p>
+      <a href="/"><button class="btn home">Home</button></a>
+    </div>
+
+    <div style="text-align:center; margin-top: 10px;">
+      <p>Are you a student?</p>
+      <a href="/login"><button class="btn" style="background-color: #6c757d;">Student Login</button></a>
+    </div>
+  </div>
+</body>
+</html>
