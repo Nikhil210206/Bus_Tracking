@@ -3,9 +3,9 @@ from student_login.app import student_bp
 from driver_login.app import driver_bp
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'
+app.secret_key = 'supersecretkey'
 
-# Register Blueprints
+# Register blueprints
 app.register_blueprint(student_bp)
 app.register_blueprint(driver_bp)
 

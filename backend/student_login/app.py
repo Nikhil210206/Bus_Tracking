@@ -1,20 +1,22 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 import sqlite3
 import os
 
-app = Flask(__name__)
-app.secret_key = "supersecretkey"
-DB_PATH = os.path.join("database", "users.db")
+student_bp = Blueprint('student_bp', __name__, template_folder='templates', static_folder='static')
 
+# Path to DB
+DB_PATH = os.path.join(os.path.dirname(__file__), "database", "users.db")
+
+# Initialize DB if not exists
 if not os.path.exists(DB_PATH):
-    from database import init_db
+    from .database import init_db  # assuming init_db is defined in student_login/database.py
     init_db(DB_PATH)
 
-@app.route('/')
+@student_bp.route('/')
 def home():
     return render_template('login.html')
 
-@app.route('/login', methods=['POST'])
+@student_bp.route('/login', methods=['POST'])
 def login():
     student_id = request.form['student_id']
     password = request.form['password']
@@ -28,12 +30,12 @@ def login():
     if user:
         session['student_id'] = student_id
         session['student_name'] = user[0]
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('student_bp.dashboard'))
     else:
         flash("Invalid Student ID or Password")
-        return redirect(url_for('home'))
+        return redirect(url_for('student_bp.home'))
 
-@app.route('/register', methods=['GET', 'POST'])
+@student_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         student_id = request.form['student_id']
@@ -48,25 +50,22 @@ def register():
             conn.commit()
             conn.close()
             flash("Registration successful! Please login.")
-            return redirect(url_for('home'))
+            return redirect(url_for('student_bp.home'))
         except sqlite3.IntegrityError:
             flash("Student ID already exists.")
-            return redirect(url_for('register'))
+            return redirect(url_for('student_bp.register'))
 
     return render_template('register.html')
 
-@app.route('/dashboard')
+@student_bp.route('/dashboard')
 def dashboard():
     if 'student_id' in session:
         return f"<h2>Welcome {session['student_name']} (ID: {session['student_id']})</h2><br><a href='/logout'>Logout</a>"
     else:
-        return redirect(url_for('home'))
+        return redirect(url_for('student_bp.home'))
 
-@app.route('/logout')
+@student_bp.route('/logout')
 def logout():
     session.clear()
     flash("Logged out successfully.")
-    return redirect(url_for('home'))
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    return redirect(url_for('student_bp.home'))
